@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: vote
     docker:
       - image: circleci/python:2.7.14
     steps:
@@ -11,10 +10,12 @@ jobs:
           command: |
             echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - run:
           name: Build and push Docker image
           command: |
             docker build -t ankit86k/vote:$TAG .
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            echo "ALL GOOD"
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            echo "ALL GOOD AGAIN"
             docker push ankit86k/vote:$TAG
