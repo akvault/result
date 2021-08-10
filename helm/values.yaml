@@ -1,0 +1,52 @@
+# Default values for app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+vote:
+  name: result
+  group: result
+  container_port: 80
+image:
+  repository: result
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: [regcred]
+
+service:
+  type: NodePort
+  port: 5001
+  nodeport: 31001
+  name: result-service
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    external-dns.alpha.kubernetes.io/hostname: result.youlearn.link
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+  hosts:
+    - host: result.youlearn.link
+      paths:
+      - backend:
+          servicename: result
+          serviceport: 5001
+          path: /*
+          
+  
+
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+

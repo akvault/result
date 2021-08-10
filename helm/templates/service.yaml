@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.vote.name }}
+  labels:
+    app: {{ .Values.vote.group }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.vote.container_port }}
+      nodePort: {{ .Values.service.nodeport }}
+      name: {{ .Values.service.name }}
+  selector:
+    app: {{ .Values.vote.group }}
