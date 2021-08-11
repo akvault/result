@@ -1,0 +1,5 @@
+image:
+  repository: ankit86k/result
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1.6"
