@@ -14,8 +14,8 @@ jobs:
       - run:
           name: Build and push Docker image
           command: |
-            docker build -t ankit86k/vote:$TAG .
+            docker build -t ankit86k/result:$TAG .
             echo "ALL GOOD"
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             echo "ALL GOOD AGAIN"
-            docker push ankit86k/vote:$TAG
+            docker push ankit86k/result:$TAG
