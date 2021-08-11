@@ -1,10 +1,10 @@
 # result
 Result app 
 
-kubectl config set-context --current --namespace=vote
+```kubectl config set-context --current --namespace=vote```
 
-helm install -f helm/result.yaml result helm/result
+```helm install -f helm/result.yaml result helm/result```
 
-helm uninstall result
+```helm uninstall result```
 
-kubectl get pods -n vote
+```kubectl get pods -n vote```
